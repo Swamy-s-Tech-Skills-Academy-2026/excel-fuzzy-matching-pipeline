@@ -343,6 +343,26 @@ paket-files/
 **/__pycache__/
 *.pyc
 
+# Python virtual environments
+venv/
+env/
+ENV/
+.venv/
+
+# Python egg files
+*.egg-info/
+dist/
+build/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Output files (optional - uncomment if you don't want to commit outputs)
+# data/output/
+
+# Pipeline logs
+data/output/pipeline.log
+
 # Cake - Uncomment if you are using it
 #tools/**
 #!tools/packages.config
