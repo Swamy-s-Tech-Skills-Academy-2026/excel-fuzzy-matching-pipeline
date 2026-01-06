@@ -95,6 +95,10 @@ cd excel-fuzzy-matching-pipeline
 
 2. **Install dependencies**:
 ```bash
+# Using uv (recommended - faster)
+uv pip install -r requirements.txt
+
+# Or using traditional pip
 pip install -r requirements.txt
 ```
 

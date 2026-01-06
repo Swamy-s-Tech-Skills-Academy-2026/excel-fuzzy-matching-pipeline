@@ -9,7 +9,14 @@
 git clone https://github.com/Swamy-s-Tech-Skills-Academy-2026/excel-fuzzy-matching-pipeline.git
 cd excel-fuzzy-matching-pipeline
 
+## Creating the Virtual environment
+uv venv
+
 # Install dependencies
+# Using uv (recommended - faster)
+uv pip install -r requirements.txt
+
+# Or using traditional pip
 pip install -r requirements.txt
 ```
 
@@ -18,6 +25,7 @@ pip install -r requirements.txt
 Create two Excel files in `data/input/`:
 
 **File 1: source_descriptions_amounts.xlsx**
+
 ```
 | Description                          | Amount   |
 |--------------------------------------|----------|
@@ -26,6 +34,7 @@ Create two Excel files in `data/input/`:
 ```
 
 **File 2: reference_descriptions_codes.xlsx**
+
 ```
 | Description                              | Code      |
 |------------------------------------------|-----------|
@@ -43,6 +52,7 @@ python main.py
 ### 4. Check Results
 
 Find your outputs in `data/output/`:
+
 - **matched_results.xlsx** - Final mappings with scores
 - **audit_log.xlsx** - Detailed explanations for each match
 - **pipeline.log** - Execution log
@@ -241,6 +251,7 @@ for source_file, ref_file in file_pairs:
 ## Support
 
 For issues or questions:
+
 - Check the [main README](../README.md)
 - Review audit logs for specific match explanations
 - Open an issue on GitHub
