@@ -62,6 +62,9 @@ This pipeline provides a **deterministic, numeric-aware fuzzy matching system** 
 ```
 excel-fuzzy-matching-pipeline/
 ├── src/
+│   ├── config/
+│   │   ├── __init__.py
+│   │   └── constants.py         # Configuration constants
 │   ├── fuzzy_matcher/
 │   │   ├── __init__.py
 │   │   ├── data_loader.py      # Excel data loading
@@ -69,9 +72,6 @@ excel-fuzzy-matching-pipeline/
 │   │   ├── matcher.py           # Fuzzy matching engine
 │   │   └── output_writer.py    # Excel output generation
 │   └── main.py                  # Pipeline orchestrator
-├── config/
-│   ├── __init__.py
-│   └── constants.py             # Configuration constants
 ├── data/
 │   ├── input/                   # Input Excel files
 │   │   ├── source_descriptions_amounts.xlsx
@@ -80,21 +80,29 @@ excel-fuzzy-matching-pipeline/
 │       ├── matched_results.xlsx
 │       ├── audit_log.xlsx
 │       └── pipeline.log
+├── docs/                        # Documentation
+│   ├── 01_USAGE.md              # Usage guide
+│   ├── 02_TECHNICAL.md          # Technical documentation
+│   └── images/                  # Documentation images
+│       ├── solution_execution.png
+│       └── tests_execution.png
 ├── tests/                       # Test files (if needed)
 ├── requirements.txt             # Python dependencies
+├── run.ps1                      # PowerShell script for Windows
+├── run_pipeline.py              # Pipeline entry point
 └── README.md                    # This file
 ```
 
 ## Installation
 
 1. **Clone the repository**:
-```bash
+```powershell
 git clone https://github.com/Swamy-s-Tech-Skills-Academy-2026/excel-fuzzy-matching-pipeline.git
 cd excel-fuzzy-matching-pipeline
 ```
 
 2. **Install dependencies**:
-```bash
+```powershell
 # Using uv (recommended - faster)
 uv pip install -r requirements.txt
 
@@ -119,36 +127,42 @@ Required packages:
 
 **⚠️ Important for Windows Users:** Use `python` (not `py`) after activating the virtual environment. The `py` launcher may use a different Python interpreter and won't find your installed packages.
 
+**⚠️ Working Directory:** All commands should be run from the project root directory (`excel-fuzzy-matching-pipeline/`).
+
 **Easiest way on Windows 11 (PowerShell):**
 ```powershell
+# From project root directory
 .\run.ps1
 ```
 This script automatically handles virtual environment activation and uses the correct Python interpreter.
 
 **Manual activation (Windows PowerShell):**
 ```powershell
+# From project root directory
 .venv\Scripts\Activate.ps1
 python run_pipeline.py
 ```
 
 **Manual activation (Windows Command Prompt):**
 ```cmd
+# From project root directory
 .venv\Scripts\activate
 python run_pipeline.py
 ```
 
 **Manual activation (Linux/Mac):**
 ```bash
+# From project root directory
 source .venv/bin/activate
 python run_pipeline.py
 ```
 
 **Alternative - Direct virtual environment Python (no activation needed):**
 ```powershell
-# Windows PowerShell/CMD
+# Windows PowerShell/CMD - From project root directory
 .venv\Scripts\python.exe run_pipeline.py
 
-# Linux/Mac
+# Linux/Mac - From project root directory
 .venv/bin/python run_pipeline.py
 ```
 
@@ -165,16 +179,20 @@ python run_pipeline.py
 ### Using Sample Data
 
 Sample data is included for testing. Just activate the virtual environment and run:
-```bash
+```powershell
+# From project root directory
 # Activate virtual environment first (see above), then:
 python run_pipeline.py
 ```
 
 The pipeline will process the sample files and generate outputs.
 
+![Solution Execution](docs/images/solution_execution.png)
+*Example: Pipeline execution showing successful matching results*
+
 ## Configuration
 
-Edit `config/constants.py` to customize behavior:
+Edit `src/config/constants.py` to customize behavior:
 
 ```python
 # Matching thresholds
@@ -297,6 +315,50 @@ The numeric-aware scoring ensures that "Office supplies purchase 150.00" matches
 2. The amount 150.00 matches the number 150 in the reference description
 3. Numeric consistency bonus boosts the final score to 95%
 
+## Testing
+
+The project includes comprehensive test coverage for all modules. Run the complete test suite:
+
+**⚠️ Working Directory:** All test commands should be run from the project root directory (`excel-fuzzy-matching-pipeline/`).
+
+**Using the test runner (recommended):**
+```powershell
+# From project root directory
+python tests/run_tests.py
+```
+
+**Using unittest directly:**
+```powershell
+# From project root directory
+python -m unittest discover -s tests -p "test_*.py"
+```
+
+**Run a specific test file:**
+```powershell
+# From project root directory
+python -m unittest tests.test_scorer
+python -m unittest tests.test_data_loader
+python -m unittest tests.test_matcher
+python -m unittest tests.test_output_writer
+python -m unittest tests.test_integration
+```
+
+**Test Coverage:**
+- ✅ `test_scorer.py` - 14 tests for NumericAwareScorer
+- ✅ `test_data_loader.py` - 12 tests for ExcelDataLoader
+- ✅ `test_matcher.py` - 9 tests for FuzzyMatcher
+- ✅ `test_output_writer.py` - 9 tests for ExcelOutputWriter
+- ✅ `test_integration.py` - 3 end-to-end integration tests
+
+**Total: 45 tests covering all modules**
+
+![Tests Execution](docs/images/tests_execution.png)
+*Example: Test suite execution showing all 45 tests passing*
+
+**Note:** The test runner automatically suppresses expected error messages (from error-handling tests) and deprecation warnings from openpyxl for cleaner output.
+
+For more details, see the [Testing Documentation](docs/01_USAGE.md#testing).
+
 ## Troubleshooting
 
 ### ModuleNotFoundError on Windows
@@ -326,11 +388,11 @@ The numeric-aware scoring ensures that "Office supplies purchase 150.00" matches
 
 ### Other Common Issues
 
-- **All matches are NO_MATCH:** Lower `FUZZY_THRESHOLD` in `config/constants.py`
+- **All matches are NO_MATCH:** Lower `FUZZY_THRESHOLD` in `src/config/constants.py`
 - **Too many false matches:** Increase `FUZZY_THRESHOLD` or decrease `AMOUNT_TOLERANCE_PERCENT`
 - **File not found:** Ensure Excel files are in `data/input/` with exact names from config
 
-For more troubleshooting tips, see [USAGE.md](USAGE.md#troubleshooting).
+For more troubleshooting tips, see [USAGE.md](docs/01_USAGE.md#troubleshooting).
 
 ## License
 

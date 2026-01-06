@@ -4,7 +4,7 @@ Configuration constants for Excel Fuzzy Matching Pipeline.
 from pathlib import Path
 
 # Project root directory
-PROJECT_ROOT = Path(__file__).parent.parent
+PROJECT_ROOT = Path(__file__).parent.parent.parent
 
 # File paths (relative to project root)
 INPUT_FILE_1 = str(PROJECT_ROOT / "data" / "input" / "source_descriptions_amounts.xlsx")

@@ -11,7 +11,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from src.fuzzy_matcher import ExcelDataLoader, FuzzyMatcher, ExcelOutputWriter
-from config import constants as config
+from src.config import constants as config
 
 
 def setup_logging():

@@ -46,7 +46,7 @@ flowchart TD
 
 ## Module Details
 
-### 1. Configuration Module (`config/`)
+### 1. Configuration Module (`src/config/`)
 
 **Purpose**: Centralize all configuration constants
 
