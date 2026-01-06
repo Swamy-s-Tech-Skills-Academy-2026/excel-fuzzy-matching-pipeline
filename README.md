@@ -80,8 +80,13 @@ excel-fuzzy-matching-pipeline/
 │       ├── matched_results.xlsx
 │       ├── audit_log.xlsx
 │       └── pipeline.log
+├── docs/                        # Documentation
+│   ├── 01-USAGE.md              # Usage guide
+│   └── 02-TECHNICAL.md          # Technical documentation
 ├── tests/                       # Test files (if needed)
 ├── requirements.txt             # Python dependencies
+├── run.ps1                      # PowerShell script for Windows
+├── run_pipeline.py              # Pipeline entry point
 └── README.md                    # This file
 ```
 
@@ -330,7 +335,7 @@ The numeric-aware scoring ensures that "Office supplies purchase 150.00" matches
 - **Too many false matches:** Increase `FUZZY_THRESHOLD` or decrease `AMOUNT_TOLERANCE_PERCENT`
 - **File not found:** Ensure Excel files are in `data/input/` with exact names from config
 
-For more troubleshooting tips, see [USAGE.md](USAGE.md#troubleshooting).
+For more troubleshooting tips, see [USAGE.md](docs/01-USAGE.md#troubleshooting).
 
 ## License
 
