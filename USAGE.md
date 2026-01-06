@@ -44,37 +44,46 @@ Create two Excel files in `data/input/`:
 
 ### 3. Run the Pipeline
 
+**⚠️ Important for Windows Users:** Use `python` (not `py`) after activating the virtual environment. The `py` launcher may use a different Python interpreter and won't find your installed packages.
+
 **Easiest way on Windows 11 (PowerShell):**
 ```powershell
 .\run.ps1
 ```
+This script automatically handles virtual environment activation and uses the correct Python interpreter.
 
-**Or manually activate the virtual environment:**
+**Manual activation (Windows PowerShell):**
 ```powershell
 .venv\Scripts\Activate.ps1
 python run_pipeline.py
 ```
 
-**On Windows (Command Prompt):**
+**Manual activation (Windows Command Prompt):**
 ```cmd
 .venv\Scripts\activate
 python run_pipeline.py
 ```
 
-**On Linux/Mac:**
+**Manual activation (Linux/Mac):**
 ```bash
 source .venv/bin/activate
 python run_pipeline.py
 ```
 
-**Alternative (using virtual environment Python directly):**
-```bash
-# Windows
+**Alternative - Direct virtual environment Python (no activation needed):**
+```powershell
+# Windows PowerShell/CMD
 .venv\Scripts\python.exe run_pipeline.py
 
 # Linux/Mac
 .venv/bin/python run_pipeline.py
 ```
+
+**Understanding `py` vs `python` on Windows:**
+- `py` → Windows Python Launcher (may bypass virtual environment)
+- `python` → Uses the active virtual environment's Python (correct choice)
+- Always use `python` after activating your virtual environment
+- The `run.ps1` script handles this automatically
 
 ### 4. Check Results
 
@@ -192,6 +201,29 @@ REF_CODE_COL = "GL Code"
 - Result: **Medium Confidence** → Matched
 
 ## Troubleshooting
+
+### Issue: `ModuleNotFoundError: No module named 'pandas'` or similar
+
+**Symptoms:** Error when running `py run_pipeline.py` or `python run_pipeline.py` without activation
+
+**Solution:** 
+1. **Activate the virtual environment first:**
+   ```powershell
+   .venv\Scripts\Activate.ps1
+   python run_pipeline.py
+   ```
+
+2. **Or use the PowerShell script (recommended):**
+   ```powershell
+   .\run.ps1
+   ```
+
+3. **Or use the virtual environment's Python directly:**
+   ```powershell
+   .venv\Scripts\python.exe run_pipeline.py
+   ```
+
+**Why this happens:** The `py` command on Windows uses the Python Launcher, which may use a system Python instead of your virtual environment. Always use `python` (not `py`) after activating the virtual environment.
 
 ### Issue: All matches are NO_MATCH
 

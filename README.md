@@ -117,37 +117,45 @@ Required packages:
 
 2. **Run the pipeline**:
 
+**⚠️ Important for Windows Users:** Use `python` (not `py`) after activating the virtual environment. The `py` launcher may use a different Python interpreter and won't find your installed packages.
+
 **Easiest way on Windows 11 (PowerShell):**
 ```powershell
 .\run.ps1
 ```
+This script automatically handles virtual environment activation and uses the correct Python interpreter.
 
-**Or manually activate the virtual environment:**
+**Manual activation (Windows PowerShell):**
 ```powershell
 .venv\Scripts\Activate.ps1
 python run_pipeline.py
 ```
 
-**On Windows (Command Prompt):**
+**Manual activation (Windows Command Prompt):**
 ```cmd
 .venv\Scripts\activate
 python run_pipeline.py
 ```
 
-**On Linux/Mac:**
+**Manual activation (Linux/Mac):**
 ```bash
 source .venv/bin/activate
 python run_pipeline.py
 ```
 
-**Alternative (using virtual environment Python directly):**
-```bash
-# Windows
+**Alternative - Direct virtual environment Python (no activation needed):**
+```powershell
+# Windows PowerShell/CMD
 .venv\Scripts\python.exe run_pipeline.py
 
 # Linux/Mac
 .venv/bin/python run_pipeline.py
 ```
+
+**Why `python` instead of `py`?**
+- `py` is the Windows Python Launcher that may use a system Python instead of your virtual environment
+- `python` (after activation) uses the virtual environment's Python interpreter
+- The `run.ps1` script automatically uses the correct Python interpreter
 
 3. **Check outputs** in `data/output/`:
    - `matched_results.xlsx` - Matched records with codes
@@ -288,6 +296,41 @@ The numeric-aware scoring ensures that "Office supplies purchase 150.00" matches
 1. Text similarity is high (~75%)
 2. The amount 150.00 matches the number 150 in the reference description
 3. Numeric consistency bonus boosts the final score to 95%
+
+## Troubleshooting
+
+### ModuleNotFoundError on Windows
+
+**Problem:** Getting `ModuleNotFoundError: No module named 'pandas'` when running the pipeline.
+
+**Cause:** Using `py` command instead of `python`, or virtual environment not activated.
+
+**Solutions:**
+1. **Use the PowerShell script (easiest):**
+   ```powershell
+   .\run.ps1
+   ```
+
+2. **Activate virtual environment and use `python`:**
+   ```powershell
+   .venv\Scripts\Activate.ps1
+   python run_pipeline.py
+   ```
+
+3. **Use virtual environment Python directly:**
+   ```powershell
+   .venv\Scripts\python.exe run_pipeline.py
+   ```
+
+**Important:** Always use `python` (not `py`) after activating the virtual environment. The `py` launcher may use a different Python interpreter.
+
+### Other Common Issues
+
+- **All matches are NO_MATCH:** Lower `FUZZY_THRESHOLD` in `config/constants.py`
+- **Too many false matches:** Increase `FUZZY_THRESHOLD` or decrease `AMOUNT_TOLERANCE_PERCENT`
+- **File not found:** Ensure Excel files are in `data/input/` with exact names from config
+
+For more troubleshooting tips, see [USAGE.md](USAGE.md#troubleshooting).
 
 ## License
 
