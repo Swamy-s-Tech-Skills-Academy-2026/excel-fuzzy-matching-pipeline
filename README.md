@@ -101,12 +101,26 @@ git clone https://github.com/Swamy-s-Tech-Skills-Academy-2026/excel-fuzzy-matchi
 cd excel-fuzzy-matching-pipeline
 ```
 
-2. **Install dependencies**:
+2. **Create virtual environment** (using `uv`):
+```powershell
+# Create virtual environment with uv (recommended - faster)
+uv venv
+
+# This creates a .venv directory in the project root
+```
+
+**Note:** This project uses `uv` to create and manage the virtual environment. If you don't have `uv` installed, install it first:
+```powershell
+pip install uv
+```
+
+3. **Install dependencies**:
 ```powershell
 # Using uv (recommended - faster)
 uv pip install -r requirements.txt
 
-# Or using traditional pip
+# Or using traditional pip (after activating venv)
+.venv\Scripts\Activate.ps1
 pip install -r requirements.txt
 ```
 
@@ -160,11 +174,34 @@ python run_pipeline.py
 **Alternative - Direct virtual environment Python (no activation needed):**
 ```powershell
 # Windows PowerShell/CMD - From project root directory
-.venv\Scripts\python.exe run_pipeline.py
+.\.venv\Scripts\python.exe .\run_pipeline.py
 
 # Linux/Mac - From project root directory
 .venv/bin/python run_pipeline.py
 ```
+
+**Alternative - If virtual environment activation fails:**
+```powershell
+# From project root directory
+# Option 1: Use venv Python directly with explicit paths
+.\.venv\Scripts\python.exe .\run_pipeline.py
+
+# Option 2: Activate venv, then use python
+.venv\Scripts\Activate.ps1
+python .\run_pipeline.py
+```
+
+**Alternative - Install dependencies into current Python interpreter:**
+If you prefer to use your system Python or a different interpreter instead of the virtual environment:
+```powershell
+# From project root directory
+# Install dependencies into the current Python interpreter
+python -m pip install -r requirements.txt
+
+# Then run the pipeline
+python run_pipeline.py
+```
+**Note:** This approach installs packages globally or into your current Python environment. Using a virtual environment is recommended for better isolation.
 
 **Why `python` instead of `py`?**
 - `py` is the Windows Python Launcher that may use a system Python instead of your virtual environment
@@ -381,8 +418,17 @@ For more details, see the [Testing Documentation](docs/01_USAGE.md#testing).
 
 3. **Use virtual environment Python directly:**
    ```powershell
-   .venv\Scripts\python.exe run_pipeline.py
+   .\.venv\Scripts\python.exe .\run_pipeline.py
    ```
+
+4. **Install dependencies into your current Python interpreter:**
+   If you want to use your current Python interpreter instead of the virtual environment:
+   ```powershell
+   # From project root directory
+   python -m pip install -r requirements.txt
+   python run_pipeline.py
+   ```
+   **Note:** This installs packages into your current Python environment. Using a virtual environment is recommended for better isolation.
 
 **Important:** Always use `python` (not `py`) after activating the virtual environment. The `py` launcher may use a different Python interpreter.
 
