@@ -72,7 +72,8 @@ class ExcelOutputWriter:
                         try:
                             if len(str(cell.value)) > max_length:
                                 max_length = len(str(cell.value))
-                        except:
+                        except (AttributeError, TypeError):
+                            # Skip cells with None or non-string values
                             pass
                     
                     adjusted_width = min(max_length + 2, 50)  # Cap at 50
