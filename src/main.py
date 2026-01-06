@@ -47,7 +47,7 @@ def main():
             config.SOURCE_DESC_COL,
             config.SOURCE_AMOUNT_COL
         )
-        logger.info(f"✓ Loaded {len(source_df)} source records")
+        logger.info(f"[OK] Loaded {len(source_df)} source records")
         
         # Step 2: Load reference data (Description + Code)
         logger.info("\n[Step 2/5] Loading reference data...")
@@ -56,7 +56,7 @@ def main():
             config.REF_DESC_COL,
             config.REF_CODE_COL
         )
-        logger.info(f"✓ Loaded {len(reference_df)} reference records")
+        logger.info(f"[OK] Loaded {len(reference_df)} reference records")
         
         # Step 3: Perform fuzzy matching
         logger.info("\n[Step 3/5] Performing fuzzy matching...")
@@ -66,18 +66,18 @@ def main():
             exact_match_bonus=config.EXACT_MATCH_BONUS
         )
         results_df = matcher.match_datasets(source_df, reference_df)
-        logger.info(f"✓ Matched {len(results_df)} records")
+        logger.info(f"[OK] Matched {len(results_df)} records")
         
         # Step 4: Save results
         logger.info("\n[Step 4/5] Saving results...")
         ExcelOutputWriter.save_results(results_df, config.OUTPUT_FILE)
-        logger.info(f"✓ Results saved to: {config.OUTPUT_FILE}")
+        logger.info(f"[OK] Results saved to: {config.OUTPUT_FILE}")
         
         # Step 5: Generate audit log
         logger.info("\n[Step 5/5] Generating audit log...")
         audit_df = matcher.get_audit_log()
         ExcelOutputWriter.save_audit_log(audit_df, config.AUDIT_LOG_FILE)
-        logger.info(f"✓ Audit log saved to: {config.AUDIT_LOG_FILE}")
+        logger.info(f"[OK] Audit log saved to: {config.AUDIT_LOG_FILE}")
         
         # Generate and display summary report
         logger.info("\n" + "="*70)
@@ -94,12 +94,12 @@ def main():
         return 0
         
     except FileNotFoundError as e:
-        logger.error(f"\n❌ File not found: {str(e)}")
+        logger.error(f"\n[ERROR] File not found: {str(e)}")
         logger.error("Please ensure input files exist in the correct location.")
         return 1
         
     except Exception as e:
-        logger.error(f"\n❌ Pipeline failed with error: {str(e)}", exc_info=True)
+        logger.error(f"\n[ERROR] Pipeline failed with error: {str(e)}", exc_info=True)
         return 1
 
 

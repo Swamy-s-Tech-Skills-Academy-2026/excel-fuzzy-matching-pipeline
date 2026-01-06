@@ -111,36 +111,36 @@ class ExcelOutputWriter:
         numeric_match_count = audit_df['Numeric_Match'].sum()
         
         report = f"""
-╔══════════════════════════════════════════════════════════════════╗
-║         EXCEL FUZZY MATCHING PIPELINE - SUMMARY REPORT          ║
-╚══════════════════════════════════════════════════════════════════╝
+======================================================================
+         EXCEL FUZZY MATCHING PIPELINE - SUMMARY REPORT          
+======================================================================
 
 Generated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
 
 MATCHING STATISTICS
-────────────────────────────────────────────────────────────────────
+----------------------------------------------------------------------
 Total Records Processed:       {total_records:>6}
 Successfully Matched:          {matched_records:>6} ({matched_records/total_records*100:.1f}%)
 No Match Found:                {no_match_records:>6} ({no_match_records/total_records*100:.1f}%)
 
 MATCH QUALITY BREAKDOWN
-────────────────────────────────────────────────────────────────────
+----------------------------------------------------------------------
 """
         for match_type, count in match_type_counts.items():
             report += f"{match_type:.<30} {count:>6} ({count/total_records*100:.1f}%)\n"
         
         report += f"""
 SCORING METRICS
-────────────────────────────────────────────────────────────────────
+----------------------------------------------------------------------
 Average Match Score:           {avg_score:>6.2f}
 Numeric Consistency Matches:   {numeric_match_count:>6} ({numeric_match_count/total_records*100:.1f}%)
 
 OUTPUT FILES
-────────────────────────────────────────────────────────────────────
-✓ Matched results saved
-✓ Audit log with detailed explanations saved
+----------------------------------------------------------------------
+[OK] Matched results saved
+[OK] Audit log with detailed explanations saved
 
-═══════════════════════════════════════════════════════════════════
+======================================================================
 """
         
         return report

@@ -9,7 +9,14 @@
 git clone https://github.com/Swamy-s-Tech-Skills-Academy-2026/excel-fuzzy-matching-pipeline.git
 cd excel-fuzzy-matching-pipeline
 
+## Creating the Virtual environment
+uv venv
+
 # Install dependencies
+# Using uv (recommended - faster)
+uv pip install -r requirements.txt
+
+# Or using traditional pip
 pip install -r requirements.txt
 ```
 
@@ -18,6 +25,7 @@ pip install -r requirements.txt
 Create two Excel files in `data/input/`:
 
 **File 1: source_descriptions_amounts.xlsx**
+
 ```
 | Description                          | Amount   |
 |--------------------------------------|----------|
@@ -26,6 +34,7 @@ Create two Excel files in `data/input/`:
 ```
 
 **File 2: reference_descriptions_codes.xlsx**
+
 ```
 | Description                              | Code      |
 |------------------------------------------|-----------|
@@ -35,14 +44,51 @@ Create two Excel files in `data/input/`:
 
 ### 3. Run the Pipeline
 
-```bash
-cd src
-python main.py
+**⚠️ Important for Windows Users:** Use `python` (not `py`) after activating the virtual environment. The `py` launcher may use a different Python interpreter and won't find your installed packages.
+
+**Easiest way on Windows 11 (PowerShell):**
+```powershell
+.\run.ps1
 ```
+This script automatically handles virtual environment activation and uses the correct Python interpreter.
+
+**Manual activation (Windows PowerShell):**
+```powershell
+.venv\Scripts\Activate.ps1
+python run_pipeline.py
+```
+
+**Manual activation (Windows Command Prompt):**
+```cmd
+.venv\Scripts\activate
+python run_pipeline.py
+```
+
+**Manual activation (Linux/Mac):**
+```bash
+source .venv/bin/activate
+python run_pipeline.py
+```
+
+**Alternative - Direct virtual environment Python (no activation needed):**
+```powershell
+# Windows PowerShell/CMD
+.venv\Scripts\python.exe run_pipeline.py
+
+# Linux/Mac
+.venv/bin/python run_pipeline.py
+```
+
+**Understanding `py` vs `python` on Windows:**
+- `py` → Windows Python Launcher (may bypass virtual environment)
+- `python` → Uses the active virtual environment's Python (correct choice)
+- Always use `python` after activating your virtual environment
+- The `run.ps1` script handles this automatically
 
 ### 4. Check Results
 
 Find your outputs in `data/output/`:
+
 - **matched_results.xlsx** - Final mappings with scores
 - **audit_log.xlsx** - Detailed explanations for each match
 - **pipeline.log** - Execution log
@@ -156,6 +202,29 @@ REF_CODE_COL = "GL Code"
 
 ## Troubleshooting
 
+### Issue: `ModuleNotFoundError: No module named 'pandas'` or similar
+
+**Symptoms:** Error when running `py run_pipeline.py` or `python run_pipeline.py` without activation
+
+**Solution:** 
+1. **Activate the virtual environment first:**
+   ```powershell
+   .venv\Scripts\Activate.ps1
+   python run_pipeline.py
+   ```
+
+2. **Or use the PowerShell script (recommended):**
+   ```powershell
+   .\run.ps1
+   ```
+
+3. **Or use the virtual environment's Python directly:**
+   ```powershell
+   .venv\Scripts\python.exe run_pipeline.py
+   ```
+
+**Why this happens:** The `py` command on Windows uses the Python Launcher, which may use a system Python instead of your virtual environment. Always use `python` (not `py`) after activating the virtual environment.
+
 ### Issue: All matches are NO_MATCH
 
 **Solution:** Lower the `FUZZY_THRESHOLD` in `config/constants.py`
@@ -241,6 +310,7 @@ for source_file, ref_file in file_pairs:
 ## Support
 
 For issues or questions:
+
 - Check the [main README](../README.md)
 - Review audit logs for specific match explanations
 - Open an issue on GitHub

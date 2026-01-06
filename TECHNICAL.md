@@ -4,7 +4,25 @@
 
 The pipeline follows a modular architecture with clear separation of concerns:
 
+```mermaid
+flowchart TD
+    Main[Main Pipeline<br/>src/main.py]
+    Loader[Data Loader<br/>data_loader.py]
+    Matcher[Fuzzy Matcher<br/>matcher.py]
+    Scorer[Numeric Scorer<br/>scorer.py]
+    Writer[Output Writer<br/>output_writer.py]
+    
+    Main -->|Loads data| Loader
+    Main -->|Orchestrates| Matcher
+    Main -->|Saves results| Writer
+    Loader -->|Provides data| Matcher
+    Matcher -->|Uses| Scorer
+    Matcher -->|Generates results| Writer
 ```
+
+*Note: If the Mermaid diagram above doesn't render, see the ASCII fallback below:*
+
+```text
 ┌─────────────────────────────────────────────────────────────┐
 │                        Main Pipeline                        │
 │                     (src/main.py)                          │
