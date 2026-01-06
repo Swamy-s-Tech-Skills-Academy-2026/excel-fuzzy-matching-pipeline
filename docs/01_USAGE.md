@@ -97,7 +97,7 @@ Find your outputs in `data/output/`:
 
 ### Adjusting Match Sensitivity
 
-Edit `config/constants.py`:
+Edit `src/config/constants.py`:
 
 ```python
 # Lower threshold = more matches (less strict)
@@ -227,7 +227,7 @@ REF_CODE_COL = "GL Code"
 
 ### Issue: All matches are NO_MATCH
 
-**Solution:** Lower the `FUZZY_THRESHOLD` in `config/constants.py`
+**Solution:** Lower the `FUZZY_THRESHOLD` in `src/config/constants.py`
 
 ### Issue: Too many false matches
 

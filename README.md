@@ -62,6 +62,9 @@ This pipeline provides a **deterministic, numeric-aware fuzzy matching system** 
 ```
 excel-fuzzy-matching-pipeline/
 ├── src/
+│   ├── config/
+│   │   ├── __init__.py
+│   │   └── constants.py         # Configuration constants
 │   ├── fuzzy_matcher/
 │   │   ├── __init__.py
 │   │   ├── data_loader.py      # Excel data loading
@@ -69,9 +72,6 @@ excel-fuzzy-matching-pipeline/
 │   │   ├── matcher.py           # Fuzzy matching engine
 │   │   └── output_writer.py    # Excel output generation
 │   └── main.py                  # Pipeline orchestrator
-├── config/
-│   ├── __init__.py
-│   └── constants.py             # Configuration constants
 ├── data/
 │   ├── input/                   # Input Excel files
 │   │   ├── source_descriptions_amounts.xlsx
@@ -81,8 +81,8 @@ excel-fuzzy-matching-pipeline/
 │       ├── audit_log.xlsx
 │       └── pipeline.log
 ├── docs/                        # Documentation
-│   ├── 01-USAGE.md              # Usage guide
-│   └── 02-TECHNICAL.md          # Technical documentation
+│   ├── 01_USAGE.md              # Usage guide
+│   └── 02_TECHNICAL.md          # Technical documentation
 ├── tests/                       # Test files (if needed)
 ├── requirements.txt             # Python dependencies
 ├── run.ps1                      # PowerShell script for Windows
@@ -335,7 +335,7 @@ The numeric-aware scoring ensures that "Office supplies purchase 150.00" matches
 - **Too many false matches:** Increase `FUZZY_THRESHOLD` or decrease `AMOUNT_TOLERANCE_PERCENT`
 - **File not found:** Ensure Excel files are in `data/input/` with exact names from config
 
-For more troubleshooting tips, see [USAGE.md](docs/01-USAGE.md#troubleshooting).
+For more troubleshooting tips, see [USAGE.md](docs/01_USAGE.md#troubleshooting).
 
 ## License
 
