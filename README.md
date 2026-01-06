@@ -82,7 +82,10 @@ excel-fuzzy-matching-pipeline/
 │       └── pipeline.log
 ├── docs/                        # Documentation
 │   ├── 01_USAGE.md              # Usage guide
-│   └── 02_TECHNICAL.md          # Technical documentation
+│   ├── 02_TECHNICAL.md          # Technical documentation
+│   └── images/                  # Documentation images
+│       ├── solution_execution.png
+│       └── tests_execution.png
 ├── tests/                       # Test files (if needed)
 ├── requirements.txt             # Python dependencies
 ├── run.ps1                      # PowerShell script for Windows
@@ -183,6 +186,9 @@ python run_pipeline.py
 ```
 
 The pipeline will process the sample files and generate outputs.
+
+![Solution Execution](docs/images/solution_execution.png)
+*Example: Pipeline execution showing successful matching results*
 
 ## Configuration
 
@@ -345,6 +351,9 @@ python -m unittest tests.test_integration
 - ✅ `test_integration.py` - 3 end-to-end integration tests
 
 **Total: 45 tests covering all modules**
+
+![Tests Execution](docs/images/tests_execution.png)
+*Example: Test suite execution showing all 45 tests passing*
 
 **Note:** The test runner automatically suppresses expected error messages (from error-handling tests) and deprecation warnings from openpyxl for cleaner output.
 
