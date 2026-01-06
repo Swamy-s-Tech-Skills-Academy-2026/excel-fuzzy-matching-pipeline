@@ -4,12 +4,12 @@
 
 ### 1. Installation
 
-```bash
+```powershell
 # Clone the repository
 git clone https://github.com/Swamy-s-Tech-Skills-Academy-2026/excel-fuzzy-matching-pipeline.git
 cd excel-fuzzy-matching-pipeline
 
-## Creating the Virtual environment
+# Creating the Virtual environment
 uv venv
 
 # Install dependencies
@@ -46,36 +46,42 @@ Create two Excel files in `data/input/`:
 
 **⚠️ Important for Windows Users:** Use `python` (not `py`) after activating the virtual environment. The `py` launcher may use a different Python interpreter and won't find your installed packages.
 
+**⚠️ Working Directory:** All commands should be run from the project root directory (`excel-fuzzy-matching-pipeline/`).
+
 **Easiest way on Windows 11 (PowerShell):**
 ```powershell
+# From project root directory
 .\run.ps1
 ```
 This script automatically handles virtual environment activation and uses the correct Python interpreter.
 
 **Manual activation (Windows PowerShell):**
 ```powershell
+# From project root directory
 .venv\Scripts\Activate.ps1
 python run_pipeline.py
 ```
 
 **Manual activation (Windows Command Prompt):**
 ```cmd
+# From project root directory
 .venv\Scripts\activate
 python run_pipeline.py
 ```
 
 **Manual activation (Linux/Mac):**
 ```bash
+# From project root directory
 source .venv/bin/activate
 python run_pipeline.py
 ```
 
 **Alternative - Direct virtual environment Python (no activation needed):**
 ```powershell
-# Windows PowerShell/CMD
+# Windows PowerShell/CMD - From project root directory
 .venv\Scripts\python.exe run_pipeline.py
 
-# Linux/Mac
+# Linux/Mac - From project root directory
 .venv/bin/python run_pipeline.py
 ```
 
@@ -243,11 +249,94 @@ REF_CODE_COL = "GL Code"
 
 ## Testing
 
-Run the test suite to verify the installation:
+The project includes comprehensive test coverage for all modules. Here's how to run the tests:
 
-```bash
-cd tests
-python test_scorer.py
+**⚠️ Working Directory:** All test commands should be run from the project root directory (`excel-fuzzy-matching-pipeline/`).
+
+### Running All Tests
+
+**Using the test runner (recommended):**
+```powershell
+# From project root directory
+python tests/run_tests.py
+```
+
+**Using unittest directly:**
+```powershell
+# From project root directory
+python -m unittest discover -s tests -p "test_*.py"
+```
+
+### Running Specific Test Files
+
+```powershell
+# From project root directory
+# Test the scorer module
+python -m unittest tests.test_scorer
+
+# Test the data loader module
+python -m unittest tests.test_data_loader
+
+# Test the matcher module
+python -m unittest tests.test_matcher
+
+# Test the output writer module
+python -m unittest tests.test_output_writer
+
+# Run integration tests
+python -m unittest tests.test_integration
+```
+
+### Test Coverage
+
+The test suite includes:
+
+- **test_scorer.py** (14 tests) - Tests for:
+  - Number extraction from text
+  - Numeric consistency checking
+  - Text similarity calculation
+  - Final score calculation
+
+- **test_data_loader.py** (12 tests) - Tests for:
+  - Loading source and reference Excel files
+  - Data cleaning and validation
+  - Error handling (missing files, wrong columns)
+  - Edge cases (empty rows, null values)
+
+- **test_matcher.py** (9 tests) - Tests for:
+  - Finding best matches
+  - Threshold handling
+  - Batch matching
+  - Audit log generation
+  - Empty dataset handling
+
+- **test_output_writer.py** (9 tests) - Tests for:
+  - Saving results to Excel
+  - Saving audit logs
+  - Summary report generation
+  - Directory creation
+  - Error handling
+
+- **test_integration.py** (3 tests) - End-to-end tests for:
+  - Complete pipeline execution
+  - Data consistency between results and audit log
+  - Match validation
+
+**Total: 45 tests covering all major functionality**
+
+### Verifying Test Results
+
+All tests should pass. The test runner will display:
+- Number of tests run
+- Successes, failures, and errors
+- Detailed error messages if any tests fail
+
+Example output:
+```
+Tests run: 45
+Successes: 45
+Failures: 0
+Errors: 0
 ```
 
 ## Advanced Usage

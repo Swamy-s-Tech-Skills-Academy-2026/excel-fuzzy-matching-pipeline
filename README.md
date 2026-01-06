@@ -93,13 +93,13 @@ excel-fuzzy-matching-pipeline/
 ## Installation
 
 1. **Clone the repository**:
-```bash
+```powershell
 git clone https://github.com/Swamy-s-Tech-Skills-Academy-2026/excel-fuzzy-matching-pipeline.git
 cd excel-fuzzy-matching-pipeline
 ```
 
 2. **Install dependencies**:
-```bash
+```powershell
 # Using uv (recommended - faster)
 uv pip install -r requirements.txt
 
@@ -124,36 +124,42 @@ Required packages:
 
 **⚠️ Important for Windows Users:** Use `python` (not `py`) after activating the virtual environment. The `py` launcher may use a different Python interpreter and won't find your installed packages.
 
+**⚠️ Working Directory:** All commands should be run from the project root directory (`excel-fuzzy-matching-pipeline/`).
+
 **Easiest way on Windows 11 (PowerShell):**
 ```powershell
+# From project root directory
 .\run.ps1
 ```
 This script automatically handles virtual environment activation and uses the correct Python interpreter.
 
 **Manual activation (Windows PowerShell):**
 ```powershell
+# From project root directory
 .venv\Scripts\Activate.ps1
 python run_pipeline.py
 ```
 
 **Manual activation (Windows Command Prompt):**
 ```cmd
+# From project root directory
 .venv\Scripts\activate
 python run_pipeline.py
 ```
 
 **Manual activation (Linux/Mac):**
 ```bash
+# From project root directory
 source .venv/bin/activate
 python run_pipeline.py
 ```
 
 **Alternative - Direct virtual environment Python (no activation needed):**
 ```powershell
-# Windows PowerShell/CMD
+# Windows PowerShell/CMD - From project root directory
 .venv\Scripts\python.exe run_pipeline.py
 
-# Linux/Mac
+# Linux/Mac - From project root directory
 .venv/bin/python run_pipeline.py
 ```
 
@@ -170,7 +176,8 @@ python run_pipeline.py
 ### Using Sample Data
 
 Sample data is included for testing. Just activate the virtual environment and run:
-```bash
+```powershell
+# From project root directory
 # Activate virtual environment first (see above), then:
 python run_pipeline.py
 ```
@@ -301,6 +308,45 @@ The numeric-aware scoring ensures that "Office supplies purchase 150.00" matches
 1. Text similarity is high (~75%)
 2. The amount 150.00 matches the number 150 in the reference description
 3. Numeric consistency bonus boosts the final score to 95%
+
+## Testing
+
+The project includes comprehensive test coverage for all modules. Run the complete test suite:
+
+**⚠️ Working Directory:** All test commands should be run from the project root directory (`excel-fuzzy-matching-pipeline/`).
+
+**Using the test runner (recommended):**
+```powershell
+# From project root directory
+python tests/run_tests.py
+```
+
+**Using unittest directly:**
+```powershell
+# From project root directory
+python -m unittest discover -s tests -p "test_*.py"
+```
+
+**Run a specific test file:**
+```powershell
+# From project root directory
+python -m unittest tests.test_scorer
+python -m unittest tests.test_data_loader
+python -m unittest tests.test_matcher
+python -m unittest tests.test_output_writer
+python -m unittest tests.test_integration
+```
+
+**Test Coverage:**
+- ✅ `test_scorer.py` - 14 tests for NumericAwareScorer
+- ✅ `test_data_loader.py` - 12 tests for ExcelDataLoader
+- ✅ `test_matcher.py` - 9 tests for FuzzyMatcher
+- ✅ `test_output_writer.py` - 9 tests for ExcelOutputWriter
+- ✅ `test_integration.py` - 3 end-to-end integration tests
+
+**Total: 45 tests covering all modules**
+
+For more details, see the [Testing Documentation](docs/01_USAGE.md#testing).
 
 ## Troubleshooting
 
