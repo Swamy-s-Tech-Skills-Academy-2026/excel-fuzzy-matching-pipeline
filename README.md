@@ -179,7 +179,7 @@ The pipeline will process the sample files and generate outputs.
 
 ## Configuration
 
-Edit `config/constants.py` to customize behavior:
+Edit `src/config/constants.py` to customize behavior:
 
 ```python
 # Matching thresholds
@@ -331,7 +331,7 @@ The numeric-aware scoring ensures that "Office supplies purchase 150.00" matches
 
 ### Other Common Issues
 
-- **All matches are NO_MATCH:** Lower `FUZZY_THRESHOLD` in `config/constants.py`
+- **All matches are NO_MATCH:** Lower `FUZZY_THRESHOLD` in `src/config/constants.py`
 - **Too many false matches:** Increase `FUZZY_THRESHOLD` or decrease `AMOUNT_TOLERANCE_PERCENT`
 - **File not found:** Ensure Excel files are in `data/input/` with exact names from config
 
