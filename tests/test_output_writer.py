@@ -6,11 +6,19 @@ import unittest
 import sys
 import tempfile
 import os
+import logging
+import warnings
 from pathlib import Path
 import pandas as pd
 
 # Add project root to path
 sys.path.insert(0, str(Path(__file__).parent.parent))
+
+# Suppress logging during tests
+logging.getLogger('src.fuzzy_matcher.output_writer').setLevel(logging.CRITICAL)
+
+# Suppress openpyxl deprecation warnings
+warnings.filterwarnings('ignore', category=DeprecationWarning, module='openpyxl')
 
 from src.fuzzy_matcher import ExcelOutputWriter
 

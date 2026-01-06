@@ -4,10 +4,18 @@ Test runner for all tests in the fuzzy matching pipeline.
 """
 import unittest
 import sys
+import warnings
+import logging
 from pathlib import Path
 
 # Add project root to path
 sys.path.insert(0, str(Path(__file__).parent.parent))
+
+# Suppress openpyxl deprecation warnings (from library, not our code)
+warnings.filterwarnings('ignore', category=DeprecationWarning, module='openpyxl')
+
+# Suppress expected error logging during tests
+logging.getLogger('src.fuzzy_matcher').setLevel(logging.CRITICAL)
 
 
 def discover_and_run_tests():

@@ -331,6 +331,8 @@ All tests should pass. The test runner will display:
 - Successes, failures, and errors
 - Detailed error messages if any tests fail
 
+**Note:** Some tests intentionally trigger errors to verify error handling works correctly. These expected error messages are suppressed in the test output for cleaner results.
+
 Example output:
 ```
 Tests run: 45
@@ -338,6 +340,8 @@ Successes: 45
 Failures: 0
 Errors: 0
 ```
+
+**Note about warnings:** If you see deprecation warnings from `openpyxl`, these are from the library itself (not our code) and are automatically suppressed by the test runner. They don't affect test results.
 
 ## Advanced Usage
 

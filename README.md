@@ -346,6 +346,8 @@ python -m unittest tests.test_integration
 
 **Total: 45 tests covering all modules**
 
+**Note:** The test runner automatically suppresses expected error messages (from error-handling tests) and deprecation warnings from openpyxl for cleaner output.
+
 For more details, see the [Testing Documentation](docs/01_USAGE.md#testing).
 
 ## Troubleshooting
