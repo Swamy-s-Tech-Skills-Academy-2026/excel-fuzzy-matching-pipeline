@@ -44,9 +44,36 @@ Create two Excel files in `data/input/`:
 
 ### 3. Run the Pipeline
 
+**Easiest way on Windows 11 (PowerShell):**
+```powershell
+.\run.ps1
+```
+
+**Or manually activate the virtual environment:**
+```powershell
+.venv\Scripts\Activate.ps1
+python run_pipeline.py
+```
+
+**On Windows (Command Prompt):**
+```cmd
+.venv\Scripts\activate
+python run_pipeline.py
+```
+
+**On Linux/Mac:**
 ```bash
-cd src
-python main.py
+source .venv/bin/activate
+python run_pipeline.py
+```
+
+**Alternative (using virtual environment Python directly):**
+```bash
+# Windows
+.venv\Scripts\python.exe run_pipeline.py
+
+# Linux/Mac
+.venv/bin/python run_pipeline.py
 ```
 
 ### 4. Check Results

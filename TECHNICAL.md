@@ -20,6 +20,30 @@ flowchart TD
     Matcher -->|Generates results| Writer
 ```
 
+*Note: If the Mermaid diagram above doesn't render, see the ASCII fallback below:*
+
+```text
+┌─────────────────────────────────────────────────────────────┐
+│                        Main Pipeline                        │
+│                     (src/main.py)                          │
+└──────────────┬──────────────────────────────┬──────────────┘
+               │                              │
+       ┌───────▼────────┐            ┌────────▼────────┐
+       │  Data Loader   │            │  Output Writer  │
+       │  (loader.py)   │            │  (writer.py)    │
+       └───────┬────────┘            └────────▲────────┘
+               │                              │
+               │      ┌────────────────┐      │
+               └─────►│  Fuzzy Matcher │──────┘
+                      │  (matcher.py)  │
+                      └────────┬───────┘
+                               │
+                      ┌────────▼───────┐
+                      │ Numeric Scorer │
+                      │  (scorer.py)   │
+                      └────────────────┘
+```
+
 ## Module Details
 
 ### 1. Configuration Module (`config/`)

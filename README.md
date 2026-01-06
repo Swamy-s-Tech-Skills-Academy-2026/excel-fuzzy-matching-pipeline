@@ -116,9 +116,37 @@ Required packages:
    - `reference_descriptions_codes.xlsx` - File with Description and Code columns
 
 2. **Run the pipeline**:
+
+**Easiest way on Windows 11 (PowerShell):**
+```powershell
+.\run.ps1
+```
+
+**Or manually activate the virtual environment:**
+```powershell
+.venv\Scripts\Activate.ps1
+python run_pipeline.py
+```
+
+**On Windows (Command Prompt):**
+```cmd
+.venv\Scripts\activate
+python run_pipeline.py
+```
+
+**On Linux/Mac:**
 ```bash
-cd src
-python main.py
+source .venv/bin/activate
+python run_pipeline.py
+```
+
+**Alternative (using virtual environment Python directly):**
+```bash
+# Windows
+.venv\Scripts\python.exe run_pipeline.py
+
+# Linux/Mac
+.venv/bin/python run_pipeline.py
 ```
 
 3. **Check outputs** in `data/output/`:
@@ -128,10 +156,10 @@ python main.py
 
 ### Using Sample Data
 
-Sample data is included for testing. Just run:
+Sample data is included for testing. Just activate the virtual environment and run:
 ```bash
-cd src
-python main.py
+# Activate virtual environment first (see above), then:
+python run_pipeline.py
 ```
 
 The pipeline will process the sample files and generate outputs.
