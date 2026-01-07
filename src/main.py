@@ -89,7 +89,7 @@ def main():
         
         logger.info("\n" + "="*70)
         logger.info("Pipeline completed successfully!")
-        logger.info("="*70)
+        logger.info("\n" + "="*70)
         
         return 0
         
